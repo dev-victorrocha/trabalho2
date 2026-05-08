@@ -5,6 +5,24 @@ import funcoes as f
 import matplotlib.pyplot as plt
 
 # parte 1
+cores = [
+  "#6390F0",
+  "#A8A77A",
+  "#7AC74C",
+  "#A6B91A",
+  "#F95587",
+  "#B7B7CE",
+  "#B6A136",
+  "#E2BF65",
+  "#6F35FC",
+  "#EE8130",
+  "#96D9D6",
+  "#000000",
+  "#C22E28",
+  "#F7D02C",
+  "#735797",
+  "#A33EA1"
+]
 df = pd.read_csv('Pokemon.csv')
 '''
 print('PARTE 01')
@@ -82,7 +100,7 @@ df["Attack/Sp. Atk"] = df["Attack"] / df["Sp. Atk"]
 f.linha()'''
 
 # 4
-# Grafico 1 - Dispersao - Combinações de tipos
+'''# Grafico 1 - Dispersao - Combinações de tipos
 plt.scatter(df["HP"], df["Defense"])
 
 # Adicionando títulos e rótulos
@@ -94,17 +112,17 @@ plt.ylabel("Defesa")
 plt.show()
 
 # Grafico 2 - Pizza
-'''lendarios = df[df["Legendary"] == True]
+lendarios = df[df["Legendary"] == True]
 quantidade_tipos = lendarios["Type 1"].value_counts()
 plt.figure(figsize=(10,7))
 plt.pie(quantidade_tipos, labels=quantidade_tipos.index, autopct='%1.1f%%')
 
 plt.title("Tipagens primárias dos pokémons lendários")
 plt.axis('equal')
-plt.show()'''
+plt.show()
 
 # Grafico 3 - Linha
-'''quantidade_tipos = df["Type 1"].value_counts()
+quantidade_tipos = df["Type 1"].value_counts()
 plt.plot(quantidade_tipos.index, df.groupby("Type 1")["Attack"].mean(), marker='s', color='blue', label='Ataque')
 plt.plot(quantidade_tipos.index, df.groupby("Type 1")["Defense"].mean(), marker='s', color='red', label='Defesa')
 
@@ -114,4 +132,15 @@ plt.ylabel("Média de ataque")
 plt.legend()
 plt.show()'''
 
-# Grafico 4
+# Grafico 4 - Barras
+tipos = df['Type 1'].value_counts()
+
+# Criando o gráfico
+plt.bar(tipos.index, tipos.values, color=cores, edgecolor='black')
+
+plt.title("Quantidade de Pokémons por tipo primário")
+plt.xlabel("Tipo")
+plt.ylabel("Número de Pokémon")
+plt.xticks(rotation=45)
+plt.locator_params(axis='y', nbins=20)
+plt.show()
